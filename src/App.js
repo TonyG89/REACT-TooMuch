@@ -1,12 +1,12 @@
 import "./App.css";
-
 import Header from "./components/Header";
 import CartMenu from "./components/CartMenu";
-import Favorites from "./components/pages/Favorites";
+import Favorites from "./pages/Favorites";
+import Clothes from "./pages/Clothes";
 import React from "react";
-import axios from "axios";
 import { Route, Routes } from "react-router-dom";
-import Clothes from "./components/pages/Clothes";
+
+import axios from "axios";
 
 const svgRemove = (
   <svg
@@ -24,49 +24,23 @@ const svgRemove = (
 );
 
 function App() {
-  const [clothes, setClothes] = React.useState([]);
-  const [cartClothes, setCartClothes] = React.useState([]);
-  const [searchValue, setSearchValue] = React.useState("");
   const [cartOpened, setCartOpened] = React.useState(false);
-  const [favorites, setFavorites] = React.useState(false);
+  const [cartClothes, setCartClothes] = React.useState([]);
+  const [clothes, setClothes] = React.useState([]);
 
   React.useEffect(() => {
-    // fetch("https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes")
-    //   .then((response) => response.json())
-    //   .then((clothes) => setClothes(clothes));
+    axios
+      .get("https://630927d6722029d9dddf3c35.mockapi.io/cart")
+      .then((response) => setCartClothes(response.data));
 
     axios
       .get("https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes")
       .then((response) => setClothes(response.data));
-
-    axios
-      .get("https://630927d6722029d9dddf3c35.mockapi.io/cart")
-      .then((response) => setCartClothes(response.data));
   }, []);
-
-  const onAddToCart = (props) => {
-    axios.post("https://630927d6722029d9dddf3c35.mockapi.io/cart/", props);
-    setCartClothes((prev) => [...prev, props]);
-  };
 
   const onRemoveInCart = (id) => {
     setCartClothes((prev) => prev.filter((i) => i.id !== id));
     axios.delete(`https://630927d6722029d9dddf3c35.mockapi.io//cart/${id}`);
-  };
-
-  const onChangeSearchInput = (e) => {
-    console.log(searchValue);
-    setSearchValue(e.target.value);
-  };
-
-  const onAddToFavorite = (props) => {
-    axios.post("https://630927d6722029d9dddf3c35.mockapi.io/favorites", props);
-    // setFavorites((prev) => [...prev, props]);
-  };
-
-  const onRemoveOfFavorite = (id) => {
-    setFavorites((prev) => prev.filter((i) => i.id !== id));
-    axios.delete(`https://630927d6722029d9dddf3c35.mockapi.io/favorites/${id}`);
   };
 
   return (
@@ -83,14 +57,10 @@ function App() {
           setCartOpened(true);
         }}
       />
-        <Routes>
-          <Route path="/favorites" element={<Favorites />} />
-          <Route
-            path="/"
-            element={<Clothes/>}
-          />
-        </Routes>
-
+      <Routes>
+        <Route path="/" element={<Clothes clothes={clothes} />} />
+        <Route path="/favorites" element={<Favorites />} />
+      </Routes>
     </div>
   );
 }
