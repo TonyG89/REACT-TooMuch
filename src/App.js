@@ -1,9 +1,12 @@
 import "./App.css";
-import Card from "./components/Card";
+
 import Header from "./components/Header";
 import CartMenu from "./components/CartMenu";
+import Favorites from "./components/pages/Favorites";
 import React from "react";
-import axios from "axios"; // не найден аксиос
+import axios from "axios";
+import { Route, Routes } from "react-router-dom";
+import Clothes from "./components/pages/Clothes";
 
 const svgRemove = (
   <svg
@@ -25,24 +28,45 @@ function App() {
   const [cartClothes, setCartClothes] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
   const [cartOpened, setCartOpened] = React.useState(false);
+  const [favorites, setFavorites] = React.useState(false);
 
   React.useEffect(() => {
     // fetch("https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes")
     //   .then((response) => response.json())
     //   .then((clothes) => setClothes(clothes));
+
     axios
       .get("https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes")
       .then((response) => setClothes(response.data));
+
+    axios
+      .get("https://630927d6722029d9dddf3c35.mockapi.io/cart")
+      .then((response) => setCartClothes(response.data));
   }, []);
 
   const onAddToCart = (props) => {
-    axios.post("https://630927d6722029d9dddf3c35.mockapi.io/cart", props);
+    axios.post("https://630927d6722029d9dddf3c35.mockapi.io/cart/", props);
     setCartClothes((prev) => [...prev, props]);
+  };
+
+  const onRemoveInCart = (id) => {
+    setCartClothes((prev) => prev.filter((i) => i.id !== id));
+    axios.delete(`https://630927d6722029d9dddf3c35.mockapi.io//cart/${id}`);
   };
 
   const onChangeSearchInput = (e) => {
     console.log(searchValue);
     setSearchValue(e.target.value);
+  };
+
+  const onAddToFavorite = (props) => {
+    axios.post("https://630927d6722029d9dddf3c35.mockapi.io/favorites", props);
+    // setFavorites((prev) => [...prev, props]);
+  };
+
+  const onRemoveOfFavorite = (id) => {
+    setFavorites((prev) => prev.filter((i) => i.id !== id));
+    axios.delete(`https://630927d6722029d9dddf3c35.mockapi.io/favorites/${id}`);
   };
 
   return (
@@ -51,6 +75,7 @@ function App() {
         <CartMenu
           items={cartClothes}
           onClose={() => setCartOpened(!cartOpened)}
+          onDelete={onRemoveInCart}
         />
       )}
       <Header
@@ -58,52 +83,14 @@ function App() {
           setCartOpened(true);
         }}
       />
-      <div className="content">
-        <div className="content-top">
-          <h1>
-            {searchValue ? `Пошук по "${searchValue}"` : "Усі бланкові речі"}
-          </h1>
-          <div className="search-block">
-            <img src="./img/search.svg" alt="search-icon" />
-            <input
-              type="text"
-              value={searchValue}
-              placeholder="Пошук"
-              onChange={onChangeSearchInput}
-            />
-            {searchValue && (
-              <img
-                class="clear"
-                src="img/btn-remove.svg"
-                alt="прибрати"
-                onClick={() => setSearchValue("")}
-              />
-            )}
-          </div>
-        </div>
-        <div className="clothes">
-          {/* <Card name="hood" size="s,m,l,x" color="black" link="1" price={300} /> */}
-          {clothes
-            .filter(
-              (item) =>
-                item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-                item.color.toLowerCase().includes(searchValue.toLowerCase()) ||
-                item.size.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            .map((item, index) => (
-              <Card
-                key={index}
-                name={item.name}
-                price={item.price}
-                size={item.size}
-                color={item.color}
-                link={item.link}
-                onClickPlus={() => onAddToCart(item)}
-                onClickFavorite={() => console.log("like")}
-              />
-            ))}
-        </div>
-      </div>
+        <Routes>
+          <Route path="/favorites" element={<Favorites />} />
+          <Route
+            path="/"
+            element={<Clothes/>}
+          />
+        </Routes>
+
     </div>
   );
 }
