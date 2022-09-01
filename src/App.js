@@ -2,11 +2,11 @@ import "./App.css";
 
 import Header from "./components/Header";
 import CartMenu from "./components/CartMenu";
-import Favorites from "./components/pages/Favorites";
+import Favorites from "./pages/Favorites";
 import React from "react";
 import axios from "axios";
 import { Route, Routes } from "react-router-dom";
-import Clothes from "./components/pages/Clothes";
+import BlankClothes from "./pages/BlankClothes";
 
 const svgRemove = (
   <svg
@@ -34,6 +34,9 @@ function App() {
     // fetch("https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes")
     //   .then((response) => response.json())
     //   .then((clothes) => setClothes(clothes));
+    axios
+      .get("https://630927d6722029d9dddf3c35.mockapi.io/favorites")
+      .then((response) => setFavorites(response.data));
 
     axios
       .get("https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes")
@@ -45,21 +48,23 @@ function App() {
   }, []);
 
   const onAddToCart = (props) => {
+    console.log(props);
     axios.post("https://630927d6722029d9dddf3c35.mockapi.io/cart/", props);
     setCartClothes((prev) => [...prev, props]);
   };
 
   const onRemoveInCart = (id) => {
+    console.log(id);
     setCartClothes((prev) => prev.filter((i) => i.id !== id));
     axios.delete(`https://630927d6722029d9dddf3c35.mockapi.io//cart/${id}`);
   };
 
   const onChangeSearchInput = (e) => {
-    console.log(searchValue);
     setSearchValue(e.target.value);
   };
 
   const onAddToFavorite = (props) => {
+    console.log(props);
     axios.post("https://630927d6722029d9dddf3c35.mockapi.io/favorites", props);
     // setFavorites((prev) => [...prev, props]);
   };
@@ -83,14 +88,24 @@ function App() {
           setCartOpened(true);
         }}
       />
-        <Routes>
-          <Route path="/favorites" element={<Favorites />} />
-          <Route
-            path="/"
-            element={<Clothes/>}
-          />
-        </Routes>
-
+      <Routes>
+        <Route path="/favorites" element={<Favorites 
+          clothes={favorites} onAddToFavorite={onAddToFavorite}
+        />} />
+        <Route
+          path="/"
+          element={
+            <BlankClothes
+              clothes={clothes}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              onAddToFavorite={onAddToFavorite}
+              onAddToCart={onAddToCart}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }

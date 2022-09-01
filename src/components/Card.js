@@ -1,20 +1,29 @@
 import React, { useState } from "react";
 
 export default function Card(props) {
-  const { name, color, price, size, link, onClickPlus, onClickFavorite } =
-    props;
+  const {
+    id,
+    name,
+    color,
+    price,
+    size,
+    link,
+    onPlus,
+    onFavorite,
+    favorited = false,
+  } = props;
 
   const [isAdded, setIsAdded] = useState(false);
 
-  const onClickAdd = () => {
-    !isAdded && onClickPlus(props);
+  const onClickPlus = () => {
+    !isAdded && onPlus(props);
     setIsAdded(!isAdded);
   };
 
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(favorited);
 
-  const onClickLike = () => {
-    onClickFavorite(props);
+  const onClickFavorite = () => {
+    onFavorite(props);
     setIsFavorite(!isFavorite);
   };
 
@@ -111,7 +120,7 @@ export default function Card(props) {
     <div className="card">
       <img
         alt="favorites"
-        onClick={onClickLike}
+        onClick={onClickFavorite}
         className="favorite"
         src={!isFavorite ? "./img/unliked.svg" : "./img/liked.svg"}
       />
@@ -125,7 +134,7 @@ export default function Card(props) {
           <span>Ціна:</span>
           <b>{price} грн</b>
         </div>
-        <div className="Added" onClick={onClickAdd}>
+        <div className="Added" onClick={onClickPlus}>
           {!isAdded ? svgPlus : svgChecked}
         </div>
       </div>
