@@ -10,7 +10,27 @@ export default function BlankClothes(props) {
     onChangeSearchInput,
     onAddToFavorite,
     onAddToCart,
+    isReady
   } = props;
+
+  const renderClothes = () => {
+    const filterClothes = clothes.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.color.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.size.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    return (isReady ? filterClothes : [...Array(9)]).map((item, index) => (
+      <Card
+        key={index}
+        added={cartClothes.some((obj) => obj.id == item.id)}
+        onPlus={(i) => onAddToCart(i)}
+        onFavorite={(i) => onAddToFavorite(i)}
+        loading={false}
+        {...item}
+      />
+    ));
+  };
 
   return (
     <div className="content">
@@ -36,24 +56,7 @@ export default function BlankClothes(props) {
           )}
         </div>
       </div>
-      <div className="clothes">
-        {clothes
-          .filter(
-            (item) =>
-              item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-              item.color.toLowerCase().includes(searchValue.toLowerCase()) ||
-              item.size.toLowerCase().includes(searchValue.toLowerCase())
-          )
-          .map((item, index) => (
-            <Card
-              key={index}
-              added={cartClothes.some(obj=>obj.id==item.id)}
-              onPlus={(i) => onAddToCart(i)}
-              onFavorite={(i) => onAddToFavorite(i)}
-              {...item}
-            />
-          ))}
-      </div>
+      <div className="clothes">{renderClothes()}</div>
     </div>
   );
 }

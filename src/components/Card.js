@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import ContentLoader from "react-content-loader";
 
 export default function Card(props) {
   const {
-    // id, 
+    // id,
     name,
     color,
     price,
@@ -11,14 +12,15 @@ export default function Card(props) {
     onPlus,
     onFavorite,
     favorited = false,
-    added= false
+    added = false,
+    loading = false,
   } = props;
 
   const [isAdded, setIsAdded] = useState(added);
 
   const onClickPlus = () => {
     // !isAdded && onPlus(props); //мой код рабоатл раньше
-    onPlus(props)
+    onPlus(props);
     setIsAdded(!isAdded);
   };
 
@@ -120,26 +122,45 @@ export default function Card(props) {
 
   return (
     <div className="card">
-      <img
-        alt="favorites"
-        onClick={onClickFavorite}
-        className="favorite"
-        src={!isFavorite ? "./img/unliked.svg" : "./img/liked.svg"}
-      />
-      <img width={210} src={url} alt="одяг" />
-      <p>
-        {name}({color})
-      </p>
-      <p>{size}</p>
-      <div className="card-bottom">
-        <div className="price">
-          <span>Ціна:</span>
-          <b>{price} грн</b>
-        </div>
-        <div className="Added" onClick={onClickPlus}>
-          {!isAdded ? svgPlus : svgChecked}
-        </div>
-      </div>
+      {!loading ? (
+        <ContentLoader
+          speed={2}
+          width={155}
+          height={250}
+          viewBox="0 0 155 265"
+          backgroundColor="#f3f3f3"
+          foregroundColor="#ecebeb"
+        >
+          <rect x="1" y="0" rx="10" ry="10" width="155" height="155" />
+          <rect x="0" y="167" rx="5" ry="5" width="155" height="15" />
+          <rect x="0" y="187" rx="5" ry="5" width="100" height="15" />
+          <rect x="1" y="234" rx="5" ry="5" width="80" height="25" />
+          <rect x="124" y="230" rx="10" ry="10" width="32" height="32" />
+        </ContentLoader>
+      ) : (
+        <>
+          <img
+            alt="favorites"
+            onClick={onClickFavorite}
+            className="favorite"
+            src={!isFavorite ? "./img/unliked.svg" : "./img/liked.svg"}
+          />
+          <img width={210} src={url} alt="одяг" />
+          <p>
+            {name}({color})
+          </p>
+          <p>{size}</p>
+          <div className="card-bottom">
+            <div className="price">
+              <span>Ціна:</span>
+              <b>{price} грн</b>
+            </div>
+            <div className="Added" onClick={onClickPlus}>
+              {!isAdded ? svgPlus : svgChecked}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
