@@ -52,6 +52,7 @@ function App() {
       setCartClothes(cartResponse.data);
       setFavorites(favoritesResponse.data);
       setClothes(clothesResponse.data);
+      
     };
     fetchData()
   }, []);
@@ -130,14 +131,14 @@ function App() {
           path="/"
           element={
             <BlankClothes
+            clothes={clothes}
               cartClothes={cartClothes}
-              clothes={clothes}
               searchValue={searchValue}
               setSearchValue={setSearchValue}
               onChangeSearchInput={onChangeSearchInput}
               onAddToFavorite={onAddToFavorite}
               onAddToCart={onAddToCart}
-              loading={isReady}
+              isReady={isReady}
             />
           }
         />

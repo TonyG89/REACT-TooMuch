@@ -10,7 +10,7 @@ export default function BlankClothes(props) {
     onChangeSearchInput,
     onAddToFavorite,
     onAddToCart,
-    isReady
+    isReady,
   } = props;
 
   const renderClothes = () => {
@@ -20,13 +20,13 @@ export default function BlankClothes(props) {
         item.color.toLowerCase().includes(searchValue.toLowerCase()) ||
         item.size.toLowerCase().includes(searchValue.toLowerCase())
     );
-    return (isReady ? filterClothes : [...Array(9)]).map((item, index) => (
+    return (isReady ? filterClothes : [...Array(6)]).map((item, index) => (
       <Card
         key={index}
-        added={cartClothes.some((obj) => obj.id == item.id)}
+        // added={cartClothes.some((obj) => Number(obj.id) === Number(item.id))}
         onPlus={(i) => onAddToCart(i)}
         onFavorite={(i) => onAddToFavorite(i)}
-        loading={false}
+        loading={!isReady}
         {...item}
       />
     ));

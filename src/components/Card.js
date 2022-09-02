@@ -122,7 +122,7 @@ export default function Card(props) {
 
   return (
     <div className="card">
-      {!loading ? (
+      {loading ? (
         <ContentLoader
           speed={2}
           width={155}
