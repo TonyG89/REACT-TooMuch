@@ -4,6 +4,7 @@ import Card from "../components/Card";
 export default function BlankClothes(props) {
   const {
     clothes,
+    cartClothes,
     searchValue,
     setSearchValue,
     onChangeSearchInput,
@@ -43,17 +44,13 @@ export default function BlankClothes(props) {
               item.color.toLowerCase().includes(searchValue.toLowerCase()) ||
               item.size.toLowerCase().includes(searchValue.toLowerCase())
           )
-          .map((item,index) => (
+          .map((item, index) => (
             <Card
-              key={item.id}
-
-              name={item.name}
-              price={item.price}
-              size={item.size}
-              color={item.color}
-              link={item.link}
+              key={index}
+              added={cartClothes.some(obj=>obj.id==item.id)}
               onPlus={(i) => onAddToCart(i)}
               onFavorite={(i) => onAddToFavorite(i)}
+              {...item}
             />
           ))}
       </div>

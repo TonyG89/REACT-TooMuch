@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function Card(props) {
   const {
-    id,
+    // id, 
     name,
     color,
     price,
@@ -11,12 +11,14 @@ export default function Card(props) {
     onPlus,
     onFavorite,
     favorited = false,
+    added= false
   } = props;
 
-  const [isAdded, setIsAdded] = useState(false);
+  const [isAdded, setIsAdded] = useState(added);
 
   const onClickPlus = () => {
-    !isAdded && onPlus(props);
+    // !isAdded && onPlus(props); //мой код рабоатл раньше
+    onPlus(props)
     setIsAdded(!isAdded);
   };
 

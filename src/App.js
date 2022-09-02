@@ -34,39 +34,72 @@ function App() {
     // fetch("https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes")
     //   .then((response) => response.json())
     //   .then((clothes) => setClothes(clothes));
-    axios
-      .get("https://630927d6722029d9dddf3c35.mockapi.io/favorites")
-      .then((response) => setFavorites(response.data));
-
-    axios
-      .get("https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes")
-      .then((response) => setClothes(response.data));
-
-    axios
-      .get("https://630927d6722029d9dddf3c35.mockapi.io/cart")
-      .then((response) => setCartClothes(response.data));
+    const fetchData = async () => {
+      const cartResponse = await axios.get(
+        "https://630927d6722029d9dddf3c35.mockapi.io/cart"
+      );
+      const favoritesResponse = await axios.get(
+        "https://630927d6722029d9dddf3c35.mockapi.io/favorites"
+      );
+      const clothesResponse = await axios.get(
+        "https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes"
+      );
+      
+      setCartClothes(cartResponse.data);
+      setFavorites(favoritesResponse.data);
+      setClothes(clothesResponse.data);
+    };
+    fetchData()
   }, []);
-
-  const onAddToCart = (props) => {
-    console.log(props);
-    axios.post("https://630927d6722029d9dddf3c35.mockapi.io/cart/", props);
-    setCartClothes((prev) => [...prev, props]);
-  };
-
-  const onRemoveInCart = (id) => {
-    console.log(id);
-    setCartClothes((prev) => prev.filter((i) => i.id !== id));
-    axios.delete(`https://630927d6722029d9dddf3c35.mockapi.io//cart/${id}`);
-  };
 
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value);
   };
 
-  const onAddToFavorite = (props) => {
+  // КОРЗИНА
+  const onAddToCart = (props) => {
     console.log(props);
-    axios.post("https://630927d6722029d9dddf3c35.mockapi.io/favorites", props);
-    // setFavorites((prev) => [...prev, props]);
+    try {
+      if (cartClothes.find((item) => item.id == props.id)) {
+        axios.delete(
+          `https://630927d6722029d9dddf3c35.mockapi.io/cart/${props.id}`
+        );
+        setCartClothes((prev) => prev.filter((item) => item.id != props.id));
+      } else {
+        axios.post("https://630927d6722029d9dddf3c35.mockapi.io/cart/", props);
+        setCartClothes((prev) => [...prev, props]);
+      }
+    } catch (error) {
+      alert("ПОМИЛКА");
+    }
+  };
+
+  const onRemoveInCart = (id) => {
+    console.log(id);
+    axios.delete(`https://630927d6722029d9dddf3c35.mockapi.io//cart/${id}`);
+    setCartClothes((prev) => prev.filter((i) => i.id !== id));
+  };
+
+  // ЗАКЛАДКИ
+  const onAddToFavorite = async (props) => {
+    console.log(props.id);
+    try {
+      if (favorites.find((item) => item.id == props.id)) {
+        console.log(props.id);
+        axios.delete(
+          `https://630927d6722029d9dddf3c35.mockapi.io/favorites/${props.id}`
+        );
+        setFavorites((prev) => prev.filter((i) => i.id != props.id)); // можно убрать чтоб не обновлялась на сайте закладки, а лишь после обновления
+      } else {
+        const { data } = await axios.post(
+          "https://630927d6722029d9dddf3c35.mockapi.io/favorites/",
+          props
+        );
+        setFavorites((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      alert("Не було додано в закладки!!");
+    }
   };
 
   const onRemoveOfFavorite = (id) => {
@@ -89,13 +122,11 @@ function App() {
         }}
       />
       <Routes>
-        <Route path="/favorites" element={<Favorites 
-          clothes={favorites} onAddToFavorite={onAddToFavorite}
-        />} />
         <Route
           path="/"
           element={
             <BlankClothes
+              cartClothes={cartClothes}
               clothes={clothes}
               searchValue={searchValue}
               setSearchValue={setSearchValue}
@@ -103,6 +134,13 @@ function App() {
               onAddToFavorite={onAddToFavorite}
               onAddToCart={onAddToCart}
             />
+          }
+        />
+
+        <Route
+          path="/favorites"
+          element={
+            <Favorites clothes={favorites} onAddToFavorite={onAddToFavorite} />
           }
         />
       </Routes>

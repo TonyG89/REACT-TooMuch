@@ -31,11 +31,11 @@ export default function CartMenu(props) {
             <>
               <div className="items">
                 {items.map((item) => (
-                  <div className="card">
+                  <div key={item.id} className="card">
                     <img
                       maxWidth={210}
                       src={`./img/clothes/${item.link}.jpg`}
-                      alt="кросівки"
+                      alt="одяг"
                     />
                     <div className="card-body">
                       <div className="card-info">
