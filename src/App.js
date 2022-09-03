@@ -7,6 +7,7 @@ import React from "react";
 import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 import BlankClothes from "./pages/BlankClothes";
+import AppContext from './context'
 
 const svgRemove = (
   <svg
@@ -22,6 +23,7 @@ const svgRemove = (
     />
   </svg>
 );
+
 
 function App() {
   const [clothes, setClothes] = React.useState([]);
@@ -107,12 +109,20 @@ function App() {
     }
   };
 
-  const onRemoveOfFavorite = (id) => {
-    setFavorites((prev) => prev.filter((i) => i.id !== id));
-    axios.delete(`https://630927d6722029d9dddf3c35.mockapi.io/favorites/${id}`);
-  };
+const isItemAdded = (id) =>{
+  return cartClothes.some((obj) => Number(obj.id) === Number(id))
+}
 
   return (
+    <AppContext.Provider value={{
+      clothes,
+      cartClothes,
+      favorites,
+      onAddToFavorite,
+      isItemAdded,
+      setCartOpened,
+      setCartClothes
+      }}>
     <div className="wrapper clear">
       {cartOpened && (
         <CartMenu
@@ -146,11 +156,12 @@ function App() {
         <Route
           path="/favorites"
           element={
-            <Favorites clothes={favorites} onAddToFavorite={onAddToFavorite} />
+            <Favorites/>
           }
         />
       </Routes>
     </div>
+    </AppContext.Provider>
   );
 }
 

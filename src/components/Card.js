@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import ContentLoader from "react-content-loader";
+import AppContext from '../context';
 
 export default function Card(props) {
   const {
-    // id,
+    id,
     name,
     color,
     price,
@@ -16,13 +17,17 @@ export default function Card(props) {
     loading = false,
   } = props;
 
-  const [isAdded, setIsAdded] = useState(added);
+
+
+// const added={isItemAdded(item && item.id)}
+
+const {isItemAdded} = React.useContext(AppContext)
 
   const onClickPlus = () => {
-    // !isAdded && onPlus(props); //мой код рабоатл раньше
     onPlus(props);
-    setIsAdded(!isAdded);
   };
+
+  console.log(name, isItemAdded(id));
 
   const [isFavorite, setIsFavorite] = useState(favorited);
 
@@ -47,6 +52,7 @@ export default function Card(props) {
       />
     </svg>
   );
+
   const svgChecked = (
     <svg
       width="24"
@@ -156,7 +162,7 @@ export default function Card(props) {
               <b>{price} грн</b>
             </div>
             <div className="Added" onClick={onClickPlus}>
-              {!isAdded ? svgPlus : svgChecked}
+              {isItemAdded(id) ? svgChecked : svgPlus}
             </div>
           </div>
         </>

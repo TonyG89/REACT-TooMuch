@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../components/Card";
+import AppContext from '../context'
 
 export default function BlankClothes(props) {
   const {
@@ -13,6 +14,8 @@ export default function BlankClothes(props) {
     isReady,
   } = props;
 
+  const {isItemAdded}= React.useContext(AppContext)
+
   const renderClothes = () => {
     const filterClothes = clothes.filter(
       (item) =>
@@ -23,9 +26,8 @@ export default function BlankClothes(props) {
     return (isReady ? filterClothes : [...Array(6)]).map((item, index) => (
       <Card
         key={index}
-        // added={cartClothes.some((obj) => Number(obj.id) === Number(item.id))}
-        onPlus={(i) => onAddToCart(i)}
         onFavorite={(i) => onAddToFavorite(i)}
+        onPlus={(i) => onAddToCart(i)}
         loading={!isReady}
         {...item}
       />
