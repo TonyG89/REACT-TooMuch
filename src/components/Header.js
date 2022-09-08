@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {useTotalSum} from '../hooks/useTotalSum'
+import {useTotalSum} from '../hooks/useTotalSum.js'
 
 export default function Header(props) {
   const {totalPrice} = useTotalSum()

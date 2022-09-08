@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import ContentLoader from "react-content-loader";
 import AppContext from "../context";
 
-export default function Card(
-  {id,
+export default function Card({
+  id,
   name,
   color,
   price,
@@ -12,29 +12,21 @@ export default function Card(
   onPlus,
   onFavorite,
   favorited = false,
-  loading = false}
-) {
+  loading = false,
+}) {
   const obj = { id, parentId: id, name, color, price, size, link };
-
   // const obj = {id, parentId, name, color, price, size, link}
-
   // const added={isItemAdded(item && item.id)}
-
   const { isItemAdded } = React.useContext(AppContext);
-
   const onClickPlus = () => {
     onPlus(obj);
   };
-
   const [isFavorite, setIsFavorite] = useState(favorited);
-
   const onClickFavorite = () => {
     onFavorite(obj);
     setIsFavorite(!isFavorite);
   };
-
   const url = `./img/clothes/${link}.jpg`;
-
   const svgPlus = (
     <svg
       width="24"
@@ -49,7 +41,6 @@ export default function Card(
       />
     </svg>
   );
-
   const svgChecked = (
     <svg
       width="24"
@@ -70,7 +61,8 @@ export default function Card(
       <defs>
         <filter
           id="filter0_d"
-          x="11.3298"
+          x="10.6665"
+          y="11.3298"
           width="10.6698"
           height="10.5132"
           filterUnits="userSpaceOnUse"
