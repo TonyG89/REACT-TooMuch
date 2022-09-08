@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Okylistik/TooMuchPlainClothes-react/precache-manifest.1983955e485bcc611439da1f624d52d4.js"
+  "/Okylistik/TooMuchPlainClothes-react/precache-manifest.9e71c088d54f9b8e8efccc6e6237e79f.js"
 );
 
 workbox.clientsClaim();
