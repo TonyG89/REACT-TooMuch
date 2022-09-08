@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/Okylistik/TooMuchPlainClothes-react/static/js/runtime~main.f08af1e6.js"
   },
   {
-    "revision": "d3cdd3be81e0270683453cef07602e4b",
+    "revision": "4f31da5793a6c8633c45b13eea870528",
     "url": "/Okylistik/TooMuchPlainClothes-react/index.html"
   }
 ];
