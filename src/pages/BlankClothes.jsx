@@ -1,12 +1,10 @@
 import React from "react";
 import Card from "../components/Card";
 import Filter from "../components/Filter";
-import AppContext from "../context";
 
 export default function BlankClothes(props) {
   const {
     clothes,
-    cartClothes,
     searchValue,
     setSearchValue,
     onChangeSearchInput,
@@ -14,8 +12,6 @@ export default function BlankClothes(props) {
     onAddToCart,
     isReady,
   } = props;
-
-  const { isItemAdded } = React.useContext(AppContext);
 
   const renderClothes = () => {
     const filterClothes = clothes.filter(

@@ -85,7 +85,6 @@ ol {
 }
 .overlay .cart-menu .card-body {
   display: flex;
-  align-items: start;
 }
 .overlay .cart-menu .card-body p {
   margin: 10px 0;

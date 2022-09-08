@@ -70,8 +70,7 @@ export default function Card(
       <defs>
         <filter
           id="filter0_d"
-          x="10.6665"
-          y="11.3298"
+          x="11.3298"
           width="10.6698"
           height="10.5132"
           filterUnits="userSpaceOnUse"

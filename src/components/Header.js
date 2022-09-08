@@ -4,7 +4,7 @@ import {useTotalSum} from '../hooks/useTotalSum'
 
 export default function Header(props) {
   const {totalPrice} = useTotalSum()
-  const { onClickCart, onClickFavorites, CartClothes} = props;
+  const { onClickCart, onClickFavorites} = props;
 
   return (
     <header>
@@ -21,7 +21,7 @@ export default function Header(props) {
         <div className="cart" onClick={onClickCart}>
           <img width={20} height={20} src="./img/cart.svg" alt="cart" />
           {/* если корзина пуста, убираем цену */}
-          {totalPrice!=0 && <span>{totalPrice} грн</span>}
+          {totalPrice!==0 && <span>{totalPrice} грн</span>}
         </div>
         <Link to="/favorites">
           <div className="favorites">
