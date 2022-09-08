@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "../components/Card";
-import Filter from "../components/Filter";
 
 export default function BlankClothes(props) {
   const {
@@ -54,8 +53,7 @@ export default function BlankClothes(props) {
             />
           )}
         </div>
-      </div>
-      <Filter/> 
+      </div> 
       <button onClick={()=>setSearchValue("")}>Усі</button>
       <button onClick={()=>setSearchValue("Худі")}>Худі</button>
       <button onClick={()=>setSearchValue("Світшот")}>Світшот</button>
