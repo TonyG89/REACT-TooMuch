@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "../components/Card";
-import AppContext from '../context'
+import Filter from "../components/Filter";
+import AppContext from "../context";
 
 export default function BlankClothes(props) {
   const {
@@ -14,7 +15,7 @@ export default function BlankClothes(props) {
     isReady,
   } = props;
 
-  const {isItemAdded}= React.useContext(AppContext)
+  const { isItemAdded } = React.useContext(AppContext);
 
   const renderClothes = () => {
     const filterClothes = clothes.filter(
@@ -58,6 +59,11 @@ export default function BlankClothes(props) {
           )}
         </div>
       </div>
+      <Filter/> 
+      <button onClick={()=>setSearchValue("")}>Усі</button>
+      <button onClick={()=>setSearchValue("Худі")}>Худі</button>
+      <button onClick={()=>setSearchValue("Світшот")}>Світшот</button>
+      <button onClick={()=>setSearchValue("Футболка")}>Футболка</button>
       <div className="clothes">{renderClothes()}</div>
     </div>
   );

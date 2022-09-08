@@ -1,21 +1,17 @@
 import React from "react";
 import Info from "./Info";
-import AppContext from "../context";
 import axios from "axios";
+import {useTotalSum} from '../hooks/useTotalSum'
 
 const delay = (ms)=> new Promise(resolve=> setTimeout(resolve,ms))
 
 export default function CartMenu(props) {
   const { items, onClose, onDelete } = props;
-
-  const { cartClothes, setCartClothes } = React.useContext(AppContext);
-
   const [orderId, setOrderId] = React.useState(null);
   const [orderComplete, setOrderComplete] = React.useState(false);
   const [btnLoading, setBtnLoading] = React.useState(false);
-
-
-
+  const {setCartClothes,cartClothes, totalPrice} = useTotalSum()
+  
   const onClickOrder = async () => {
 try {
   setBtnLoading(false)
@@ -91,12 +87,12 @@ setBtnLoading(true)
                   <li>
                     <span>Всього:</span>
                     <div className="dashed" />
-                    <b>0грн</b>
+                    <b>{totalPrice} грн</b>
                   </li>
                   <li>
                     <span>Податок:</span>
                     <div className="dashed" />
-                    <b>0грн</b>
+                    <b>{totalPrice*0.05}грн</b>
                   </li>
                 </ul>
                 <button className="greenButton" disabled={btnLoading} onClick={onClickOrder}>

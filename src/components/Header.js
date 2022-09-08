@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {useTotalSum} from '../hooks/useTotalSum'
 
 export default function Header(props) {
-  const { onClickCart, onClickFavorites, sum } = props;
+  const {totalPrice} = useTotalSum()
+  const { onClickCart, onClickFavorites, CartClothes} = props;
 
   return (
     <header>
@@ -18,7 +20,8 @@ export default function Header(props) {
       <div className="headerRight">
         <div className="cart" onClick={onClickCart}>
           <img width={20} height={20} src="./img/cart.svg" alt="cart" />
-          <span>{sum} грн</span>
+          {/* если корзина пуста, убираем цену */}
+          {totalPrice!=0 && <span>{totalPrice} грн</span>}
         </div>
         <Link to="/favorites">
           <div className="favorites">
@@ -31,9 +34,11 @@ export default function Header(props) {
             />
           </div>
         </Link>
+        <Link to="/orders">
         <div className="user">
           <img width={20} height={20} src="./img/user.svg" alt="user" />
         </div>
+        </Link>
       </div>
     </header>
   );

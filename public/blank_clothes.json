@@ -3,7 +3,7 @@
     "id": 1,
     "name": "худі",
     "link": "1",
-    "size": "усі",
+    "size": "S, M, L, XL, XXL",
     "color": "чорний",
     "price": 600
   },
@@ -11,7 +11,7 @@
     "id": 2,
     "name": "світшот",
     "link": "4",
-    "size": "усі",
+    "size": "S, M, L, XL, XXL",
     "color": "чорний",
     "price": 350
   },
@@ -19,7 +19,7 @@
     "id": 3,
     "name": "футболка",
     "link": "7",
-    "size": "усі",
+    "size": "S, M, L, XL, XXL",
     "color": "чорний",
     "price": 150
   },
@@ -27,7 +27,7 @@
     "id": 4,
     "name": "худі",
     "link": "2",
-    "size": "усі",
+    "size": "S, M, L, XL, XXL",
     "color": "сірий",
     "price": 600
   },
@@ -35,7 +35,7 @@
     "id": 5,
     "name": "світшот",
     "link": "5",
-    "size": "усі",
+    "size": "S, M, L, XL, XXL",
     "color": "сірий",
     "price": 350
   },
@@ -43,7 +43,7 @@
     "id": 6,
     "name": "футболка",
     "link": "8",
-    "size": "усі",
+    "size": "S, M, L, XL, XXL",
     "color": "сірий",
     "price": 150
   },
@@ -51,7 +51,7 @@
     "id": 7,
     "name": "худі",
     "link": "3",
-    "size": "усі",
+    "size": "S, M, L, XL, XXL",
     "color": "білий",
     "price": 550
   },
@@ -59,7 +59,7 @@
     "id": 8,
     "name": "світшот",
     "link": "6",
-    "size": "усі",
+    "size": "S, M, L, XL, XXL",
     "color": "білий",
     "price": 330
   },
@@ -67,7 +67,7 @@
     "id": 9,
     "name": "футболка",
     "link": "9",
-    "size": "усі",
+    "size": "S, M, L, XL, XXL",
     "color": "білий",
     "price": 120
   }

@@ -7,7 +7,8 @@ import React from "react";
 import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 import BlankClothes from "./pages/BlankClothes";
-import AppContext from './context'
+import Orders from "./pages/Orders";
+import AppContext from "./context";
 
 const svgRemove = (
   <svg
@@ -24,7 +25,6 @@ const svgRemove = (
   </svg>
 );
 
-
 function App() {
   const [clothes, setClothes] = React.useState([]);
   const [cartClothes, setCartClothes] = React.useState([]);
@@ -34,29 +34,46 @@ function App() {
   const [isReady, setIsReady] = React.useState(false);
 
   React.useEffect(() => {
-    setIsReady(false)
-    // fetch("https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes")
-    //   .then((response) => response.json())
-    //   .then((clothes) => setClothes(clothes));
-    const fetchData = async () => {
-      const cartResponse = await axios.get(
-        "https://630927d6722029d9dddf3c35.mockapi.io/cart"
-      );
-      const favoritesResponse = await axios.get(
-        "https://630927d6722029d9dddf3c35.mockapi.io/favorites"
-      );
-      const clothesResponse = await axios.get(
-        "https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes"
-      );
+    //лоадер скелетон
+    setIsReady(false);
 
-      setIsReady(true)
-      
-      setCartClothes(cartResponse.data);
-      setFavorites(favoritesResponse.data);
-      setClothes(clothesResponse.data);
-      
+    const fetchData = async () => {
+      try {
+        const [
+          cartResponse,
+          favoritesResponse,
+          clothesResponse,
+        ] = await Promise.all([
+          await axios.get("https://630927d6722029d9dddf3c35.mockapi.io/cart"),
+          await axios.get(
+            "https://630927d6722029d9dddf3c35.mockapi.io/favorites"
+          ),
+          await axios.get(
+            "https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes"
+          ),
+        ]);
+        // без Promise all
+        // const cartResponse = await axios.get(
+        //   "https://630927d6722029d9dddf3c35.mockapi.io/cart"
+        // );
+        // const favoritesResponse = await axios.get(
+        //   "https://630927d6722029d9dddf3c35.mockapi.io/favorites"
+        // );
+        // const clothesResponse = await axios.get(
+        //   "https://630927d6722029d9dddf3c35.mockapi.io/blank_clothes"
+        // );
+
+        setIsReady(true);
+
+        setCartClothes(cartResponse.data);
+        setFavorites(favoritesResponse.data);
+        setClothes(clothesResponse.data);
+      } catch (error) {
+        alert("Щось пішло не так");
+        console.error(error);
+      }
     };
-    fetchData()
+    fetchData();
   }, []);
 
   const onChangeSearchInput = (e) => {
@@ -64,27 +81,33 @@ function App() {
   };
 
   // КОРЗИНА
-  const onAddToCart = (props) => {
+  const onAddToCart = async (props) => {
     console.log(props);
+    const findItem=cartClothes.find((item) => item.parentId == props.id)
     try {
-      if (cartClothes.find((item) => item.id == props.id)) {
-        axios.delete(
-          `https://630927d6722029d9dddf3c35.mockapi.io/cart/${props.id}`
+      if (findItem) {
+        await axios.delete(
+          `https://630927d6722029d9dddf3c35.mockapi.io/cart/${findItem.id}`
         );
-        setCartClothes((prev) => prev.filter((item) => item.id != props.id));
+        setCartClothes((prev) => prev.filter((item) => item.parentId != props.id));
       } else {
-        axios.post("https://630927d6722029d9dddf3c35.mockapi.io/cart/", props);
+        await axios.post("https://630927d6722029d9dddf3c35.mockapi.io/cart/", props);
         setCartClothes((prev) => [...prev, props]);
       }
     } catch (error) {
-      alert("ПОМИЛКА");
+      alert("Щось пішло не так");
+      console.error(error);
     }
   };
 
   const onRemoveInCart = (id) => {
-    console.log(id);
-    axios.delete(`https://630927d6722029d9dddf3c35.mockapi.io//cart/${id}`);
-    setCartClothes((prev) => prev.filter((i) => i.id !== id));
+    try {
+      axios.delete(`https://630927d6722029d9dddf3c35.mockapi.io//cart/${id}`);
+      setCartClothes((prev) => prev.filter((i) => i.id !== id));
+    } catch (error) {
+      alert("Щось пішло не так");
+      console.error(error);
+    }
   };
 
   // ЗАКЛАДКИ
@@ -106,61 +129,58 @@ function App() {
       }
     } catch (error) {
       alert("Не було додано в закладки!!");
+      console.error(error);
     }
   };
 
-const isItemAdded = (id) =>{
-  return cartClothes.some((obj) => Number(obj.id) === Number(id))
-}
+  const isItemAdded = (id) => cartClothes.some((obj) => Number(obj.parentId) === Number(id));
 
   return (
-    <AppContext.Provider value={{
-      clothes,
-      cartClothes,
-      favorites,
-      onAddToFavorite,
-      isItemAdded,
-      setCartOpened,
-      setCartClothes
-      }}>
-    <div className="wrapper clear">
-      {cartOpened && (
-        <CartMenu
-          items={cartClothes}
-          onClose={() => setCartOpened(!cartOpened)}
-          onDelete={onRemoveInCart}
+    <AppContext.Provider
+      value={{
+        clothes,
+        cartClothes,
+        favorites,
+        onAddToFavorite,
+        isItemAdded,
+        setCartOpened,
+        setCartClothes,
+      }}
+    >
+      <div className="wrapper clear">
+        {cartOpened && (
+          <CartMenu
+            items={cartClothes}
+            onClose={() => setCartOpened(!cartOpened)}
+            onDelete={onRemoveInCart}
+          />
+        )}
+        <Header
+          onClickCart={() => {
+            setCartOpened(true);
+          }}
         />
-      )}
-      <Header
-        onClickCart={() => {
-          setCartOpened(true);
-        }}
-      />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <BlankClothes
-            clothes={clothes}
-              cartClothes={cartClothes}
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-              onChangeSearchInput={onChangeSearchInput}
-              onAddToFavorite={onAddToFavorite}
-              onAddToCart={onAddToCart}
-              isReady={isReady}
-            />
-          }
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <BlankClothes
+                clothes={clothes}
+                cartClothes={cartClothes}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                onChangeSearchInput={onChangeSearchInput}
+                onAddToFavorite={onAddToFavorite}
+                onAddToCart={onAddToCart}
+                isReady={isReady}
+              />
+            }
+          />
 
-        <Route
-          path="/favorites"
-          element={
-            <Favorites/>
-          }
-        />
-      </Routes>
-    </div>
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/orders" element={<Orders />} />
+        </Routes>
+      </div>
     </AppContext.Provider>
   );
 }

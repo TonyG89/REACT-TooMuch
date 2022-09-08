@@ -1,38 +1,35 @@
 import React, { useState } from "react";
 import ContentLoader from "react-content-loader";
-import AppContext from '../context';
+import AppContext from "../context";
 
-export default function Card(props) {
-  const {
-    id,
-    name,
-    color,
-    price,
-    size,
-    link,
-    onPlus,
-    onFavorite,
-    favorited = false,
-    added = false,
-    loading = false,
-  } = props;
+export default function Card(
+  {id,
+  name,
+  color,
+  price,
+  size,
+  link,
+  onPlus,
+  onFavorite,
+  favorited = false,
+  loading = false}
+) {
+  const obj = { id, parentId: id, name, color, price, size, link };
 
+  // const obj = {id, parentId, name, color, price, size, link}
 
+  // const added={isItemAdded(item && item.id)}
 
-// const added={isItemAdded(item && item.id)}
-
-const {isItemAdded} = React.useContext(AppContext)
+  const { isItemAdded } = React.useContext(AppContext);
 
   const onClickPlus = () => {
-    onPlus(props);
+    onPlus(obj);
   };
-
-  console.log(name, isItemAdded(id));
 
   const [isFavorite, setIsFavorite] = useState(favorited);
 
   const onClickFavorite = () => {
-    onFavorite(props);
+    onFavorite(obj);
     setIsFavorite(!isFavorite);
   };
 
@@ -145,12 +142,15 @@ const {isItemAdded} = React.useContext(AppContext)
         </ContentLoader>
       ) : (
         <>
-          <img
-            alt="favorites"
-            onClick={onClickFavorite}
-            className="favorite"
-            src={!isFavorite ? "./img/unliked.svg" : "./img/liked.svg"}
-          />
+          {onFavorite && (
+            <img
+              alt="favorites"
+              onClick={onClickFavorite}
+              className="favorite"
+              // меняем кнопки лайк на дислайк
+              src={!isFavorite ? "./img/unliked.svg" : "./img/liked.svg"}
+            />
+          )}
           <img width={210} src={url} alt="одяг" />
           <p>
             {name}({color})
@@ -161,9 +161,12 @@ const {isItemAdded} = React.useContext(AppContext)
               <span>Ціна:</span>
               <b>{price} грн</b>
             </div>
-            <div className="Added" onClick={onClickPlus}>
-              {isItemAdded(id) ? svgChecked : svgPlus}
-            </div>
+            {/* отключаем кнопку добавить, если в пропсах их нет */}
+            {onPlus && (
+              <div className="Added" onClick={onClickPlus}>
+                {isItemAdded(id) ? svgChecked : svgPlus}
+              </div>
+            )}
           </div>
         </>
       )}
