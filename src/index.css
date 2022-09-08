@@ -143,8 +143,9 @@ ol {
 header {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #eaeaea;
-  padding: 40px;
+  border-bottom: 3px solid #4e4e4e;
+  padding: 30px;
+  background:rgba(250, 249, 249, 0.685)
 }
 header .headerLeft {
   display: flex;
