@@ -17,6 +17,7 @@ export default function Card({
   const obj = { id, parentId: id, title, color, price, size, link };
   // const obj = {id, parentId, title, color, price, size, link}
   // const added={isItemAdded(item && item.id)}
+
   const { isItemAdded } = React.useContext(AppContext);
   const onClickPlus = () => {
     onPlus(obj);
@@ -146,7 +147,7 @@ export default function Card({
           <p>
             {title}({color})
           </p>
-          <p>{size.join(', ')}</p>
+          <p>{size.join()}</p>
           <div className="card-bottom">
             <div className="price">
               <span>Ціна:</span>

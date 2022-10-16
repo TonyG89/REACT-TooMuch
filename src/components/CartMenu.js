@@ -69,7 +69,8 @@ export default function CartMenu(props) {
                     <div className="card-body">
                       <div className="card-info">
                         <p>
-                          {item.name} {item.color} розмір{item.size}
+                          {item.title} {item.color} </p>
+                          <p>розмір: {item.size.join(', ')}
                         </p>
                         <b>{item.price} грн</b>
                       </div>
