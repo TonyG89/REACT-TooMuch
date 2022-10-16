@@ -7,6 +7,23 @@
   pointer-events: none;
 }
 
+.filter{
+  font-size: large;
+  padding: 5px 15px;
+  margin: 5px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.filter:hover{
+  background-color: rgb(204, 204, 204);
+}
+
+.filter:active{
+  background-color: rgb(204, 204, 204);
+  font-weight: 600;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

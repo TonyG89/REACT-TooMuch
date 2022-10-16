@@ -18,7 +18,7 @@ export default function BlankClothes(props) {
       (item) =>
         item.title.toLowerCase().includes(searchValue.toLowerCase()) ||
         item.color.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.size.toLowerCase().includes(searchValue.toLowerCase())
+        item.size.join(", ").toLowerCase().includes(searchValue.toLowerCase())
     );
     return (isReady ? filterClothes : [...Array(6)]).map((item, index) => (
       <Card
@@ -54,11 +54,10 @@ export default function BlankClothes(props) {
           )}
         </div>
       </div>
-      <Filter/> 
-      <button onClick={()=>setSearchValue("")}>Усі</button>
-      <button onClick={()=>setSearchValue("Худі")}>Худі</button>
-      <button onClick={()=>setSearchValue("Світшот")}>Світшот</button>
-      <button onClick={()=>setSearchValue("Футболка")}>Футболка</button>
+      <button className="filter" onClick={()=>setSearchValue("")}>Усі</button>
+      <button className="filter" onClick={()=>setSearchValue("Худі")}>Худі</button>
+      <button className="filter" onClick={()=>setSearchValue("Світшот")}>Світшот</button>
+      <button className="filter" onClick={()=>setSearchValue("Футболка")}>Футболка</button>
       <div className="clothes">{renderClothes()}</div>
     </div>
   )
