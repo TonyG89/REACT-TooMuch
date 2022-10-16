@@ -16,7 +16,7 @@ export default function BlankClothes(props) {
   const renderClothes = () => {
     const filterClothes = clothes.filter(
       (item) =>
-        item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.title.toLowerCase().includes(searchValue.toLowerCase()) ||
         item.color.toLowerCase().includes(searchValue.toLowerCase()) ||
         item.size.toLowerCase().includes(searchValue.toLowerCase())
     );
