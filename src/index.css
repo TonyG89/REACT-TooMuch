@@ -41,7 +41,14 @@ ol {
 .items {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 75vh;
+  margin-bottom: auto;
+}
+
+.cart-menu-top{
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+height: 100%;
 }
 
 .overlay {
@@ -82,6 +89,7 @@ ol {
   width: 80%;
   overflow: hidden;
   justify-content: space-between;
+
 }
 .overlay .cart-menu .card-body {
   display: flex;
@@ -205,6 +213,7 @@ header p {
 .card {
   border: 1px solid rgb(226, 225, 188);
   margin: 5px;
+  margin-top: 20px;
   padding: 20px;
   width: 210px;
   border-radius: 40px;
@@ -244,6 +253,7 @@ header p {
 
 .cartEmpty {
   text-align: center;
+  margin: auto;
 }
 .cartEmpty p {
   width: 280px;
@@ -270,6 +280,8 @@ header p {
   padding: 0 15px;
   position: relative;
   background-color: white;
+  display: flex;
+  flex-wrap: nowrap;
 }
 .search-block .clear {
   position: absolute;
@@ -400,4 +412,60 @@ header p {
   100% {
     opacity: 1;
   }
-}/*# sourceMappingURL=index.css.map */
+}
+
+@media screen and (max-width:780px) {
+  .content-top {
+    flex-direction: column;
+  }
+  .content-top h1 {
+    order:2;
+    font-size: 1.8em;
+    padding-top: 5px;
+  }
+  .filter{
+    margin: auto;
+  }
+  header{
+    flex-direction: column;
+  }
+  .headerLeft{
+    margin: auto;
+  }
+  .headerRight{
+    margin: auto;
+    padding-top: 10px;
+  }
+}
+
+@media screen and (max-width:480px) {
+  .overlay .cart-menu{
+    width: 300px;
+    padding: 0 10px;
+  }
+  .card-info{
+    font-size: 0.8em;
+  }
+  .cart-menu-top{
+    width: 100%;
+  }
+  .cart{
+    padding: 0;
+  }
+  .items{
+    /* margin: auto; */
+    align-self: center;
+  }
+  .cart-menu .card img{
+    display: none;
+  }
+  .cart-menu-bottom li{
+    flex-direction: column;
+    padding: 5px;
+    float:right;
+    margin-bottom: 10px;
+  }
+  .dashed{
+    display: none;
+  }
+}

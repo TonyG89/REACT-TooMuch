@@ -70,7 +70,7 @@ export default function CartMenu(props) {
                       <div className="card-info">
                         <p>
                           {item.title} {item.color} </p>
-                          <p>розмір: {item.size.join(', ')}
+                        <p>розмір: {item.size.join(', ')}
                         </p>
                         <b>{item.price} грн</b>
                       </div>
@@ -89,11 +89,6 @@ export default function CartMenu(props) {
                     <span>Всього:</span>
                     <div className="dashed" />
                     <b>{totalPrice} грн</b>
-                  </li>
-                  <li>
-                    <span>Податок:</span>
-                    <div className="dashed" />
-                    <b>{totalPrice * 0.05}грн</b>
                   </li>
                 </ul>
                 <button

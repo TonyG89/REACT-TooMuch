@@ -120,8 +120,8 @@ export default function Card({
       {loading ? (
         <ContentLoader
           speed={2}
-          width={155}
-          height={250}
+          width={205}
+          height={350}
           viewBox="0 0 155 265"
           backgroundColor="#f3f3f3"
           foregroundColor="#ecebeb"
@@ -132,6 +132,7 @@ export default function Card({
           <rect x="1" y="234" rx="5" ry="5" width="80" height="25" />
           <rect x="124" y="230" rx="10" ry="10" width="32" height="32" />
         </ContentLoader>
+        
       ) : (
         <>
           {onFavorite && (

@@ -1,5 +1,3 @@
-import "./App.css";
-
 import Header from "./components/Header";
 import CartMenu from "./components/CartMenu";
 import Favorites from "./pages/Favorites";
@@ -67,7 +65,6 @@ function App() {
 
   // КОРЗИНА
   const onAddToCart = async (props) => {
-    console.log(props);
     const findItem = cartClothes.find(
       (item) => Number(item.parentId) === Number(props.id)
     );
