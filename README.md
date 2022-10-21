@@ -9,4 +9,4 @@
 - mockapi.io
 
 
-[deploy](https://toomuchpc.herokuapp.com/)
+# [watch demo](https://tmplantclothes-v1.herokuapp.com/)
