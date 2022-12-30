@@ -45,7 +45,7 @@ export default function BlankClothes(props) {
           />
           {searchValue && (
             <img
-              class="clear"
+              className="clear"
               src="img/btn-remove.svg"
               alt="прибрати"
               onClick={() => setSearchValue("")}

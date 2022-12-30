@@ -1,12 +1,11 @@
 
 **Stack:**
-- ReactJS + хуки
+- ReactJS + hooks
 - React Router
 - Axios
 - SCSS
 - React Context
 - React Skeleton
-- mockapi.io
-
+- mockapi.io (cart, favorites, orders)
 
 # [watch demo](https://tmplantclothes-v1.herokuapp.com/)

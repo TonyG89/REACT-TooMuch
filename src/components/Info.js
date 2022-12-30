@@ -3,7 +3,7 @@ import AppContext from "../context";
 const Info = ({ title, img, description }) => {
   const { setCartOpened } = React.useContext(AppContext);
   return (
-    <div class="cartEmpty">
+    <div className="cartEmpty">
       <img src={`./img/${img}.jpg`} alt="Empty" />
       <h2>{title}</h2>
       <p className="opacity-6">{description}</p>
