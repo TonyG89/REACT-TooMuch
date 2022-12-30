@@ -48,12 +48,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Okylistik/REACT-TooMuch.git"
+    "url": "git+https://github.com/TonyG89/REACT-TooMuch.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Okylistik/REACT-TooMuch/issues"
+    "url": "https://github.com/TonyG89/REACT-TooMuch/issues"
   },
-  "homepage": "https://github.com/Okylistik/REACT-TooMuch#readme"
+  "homepage": "https://github.com/TonyG89/REACT-TooMuch#readme"
 }
