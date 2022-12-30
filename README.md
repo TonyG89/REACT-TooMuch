@@ -8,4 +8,4 @@
 - React Skeleton
 - mockapi.io (cart, favorites, orders)
 
-# [demo](https://tmplantclothes-v1.herokuapp.com/)
+# [demo](https://tonyg89.github.io/REACT-TooMuch)
