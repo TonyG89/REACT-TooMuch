@@ -8,4 +8,4 @@
 - React Skeleton
 - mockapi.io (cart, favorites, orders)
 
-# [watch demo](https://tmplantclothes-v1.herokuapp.com/)
+# [demo](https://tmplantclothes-v1.herokuapp.com/)
