@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Okylistik/TooMuchPlainClothes-react/precache-manifest.19c9a78b8676edd22f45307582748e8c.js"
+  "/TonyG89/REACT-TooMuch/precache-manifest.d80c88f5304435818e915e97dbf6ee80.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/Okylistik/TooMuchPlainClothes-react/index.html", {
+workbox.routing.registerNavigationRoute("/TonyG89/REACT-TooMuch/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
