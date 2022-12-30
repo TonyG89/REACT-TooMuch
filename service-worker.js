@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/TonyG89/REACT-TooMuch/precache-manifest.a83349827e3c5588f5c7f6c8151c97ef.js"
+  "/REACT-TooMuch/precache-manifest.f0e6d83841b1bf48692e0cfe0795d136.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/TonyG89/REACT-TooMuch/index.html", {
+workbox.routing.registerNavigationRoute("/REACT-TooMuch/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
