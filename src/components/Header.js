@@ -4,18 +4,18 @@ import {useTotalSum} from '../hooks/useTotalSum.js'
 
 export default function Header(props) {
   const {totalPrice} = useTotalSum()
-  const { onClickCart, onClickFavorites} = props;
+  const {onClickCart, onClickFavorites} = props;
 
   return (
     <header>
       <div className="headerLeft">
         <Link to="/">
           <img width={40} height={40} src="./img/logo.png" alt="logo tmpc" />
-        </Link>
         <div className="headerInfo">
           <h3>Too Much Plain clothes</h3>
           <p>Найкращий магазин бланкової одежі</p>
         </div>
+        </Link>
       </div>
       <div className="headerRight">
         <div className="cart" onClick={onClickCart}>

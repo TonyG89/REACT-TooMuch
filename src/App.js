@@ -154,7 +154,7 @@ function App() {
         />
         <Routes>
           <Route
-            path="/"
+            path={["/", "/REACT-TooMuch"]}
             element={
               <BlankClothes
                 clothes={clothes}
