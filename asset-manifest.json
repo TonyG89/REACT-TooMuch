@@ -1,7 +1,7 @@
 {
-  "main.css": "/REACT-TooMuch/static/css/main.ae021d70.chunk.css",
-  "main.js": "/REACT-TooMuch/static/js/main.c13bb64a.chunk.js",
-  "main.js.map": "/REACT-TooMuch/static/js/main.c13bb64a.chunk.js.map",
+  "main.css": "./static/css/main.ae021d70.chunk.css",
+  "main.js": "./static/js/main.c13bb64a.chunk.js",
+  "main.js.map": "./static/js/main.c13bb64a.chunk.js.map",
   "static/js/1.5589a5e7.chunk.js": "/REACT-TooMuch/static/js/1.5589a5e7.chunk.js",
   "static/js/1.5589a5e7.chunk.js.map": "/REACT-TooMuch/static/js/1.5589a5e7.chunk.js.map",
   "runtime~main.js": "/REACT-TooMuch/static/js/runtime~main.54c15fca.js",
