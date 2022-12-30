@@ -48,12 +48,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Okylistik/TooMuchPlainClothes-react.git"
+    "url": "git+https://github.com/Okylistik/REACT-TooMuch.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Okylistik/TooMuchPlainClothes-react/issues"
+    "url": "https://github.com/Okylistik/REACT-TooMuch/issues"
   },
-  "homepage": "https://github.com/Okylistik/TooMuchPlainClothes-react#readme"
+  "homepage": "https://github.com/Okylistik/REACT-TooMuch#readme"
 }
